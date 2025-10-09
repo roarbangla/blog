@@ -6,6 +6,7 @@ import { formatDate, parseHtml } from "@src/lib/utils";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import Link from "next/link";
 import Image from 'next/image';
+import Head from 'next/head';
 
 export default async function Article ({
     params,
@@ -20,6 +21,10 @@ export default async function Article ({
   if (!article) {
     return (
       <>
+      <Head>
+        <title>Article Not Found</title>
+        <meta name="description" content="Article Not Found" />
+      </Head>
         <Header />
         <main className="container mx-auto px-4 py-12">
           <div className="text-center">
@@ -35,6 +40,10 @@ export default async function Article ({
 
   return (
     <>
+    <Head>
+      <title>{article.title}</title>
+      <meta name="description" content={article.excerpt ?? article.title} />
+    </Head>
       <Header />
       <article className="animate-fade-in">
         {/* Hero Image */}
@@ -42,6 +51,8 @@ export default async function Article ({
           <Image
             src={article.featured_media?.source_url}
             alt={article.title}
+            width={1200}
+            height={900}
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-overlay" />

@@ -4,10 +4,17 @@ import { ArticleCardProps } from "@src/types/article";
 export async function getArticles(props?:{
   page?: number,
   perPage?: number,
+  search?: string,
 }): Promise<ArticleCardProps[]> {
-  const { page = 1, perPage = 12 } = props || {};
+  const { page = 1, perPage = 12, search } = props || {};
 
     return await prisma.post.findMany({
+        where: {
+          title: {
+            contains: search ?? '',
+            mode: 'insensitive',
+          },
+        },
         select:{
             id: true,
             title: true,

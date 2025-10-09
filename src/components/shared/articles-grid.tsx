@@ -8,23 +8,29 @@ import { getArticles } from "@src/lib/api"
 
 export const ArticlesGrid = ({
     articles: initialArticles,
+    loadNext,
 }: {
     articles: ArticleCardProps[]
+    loadNext: boolean
 }) => {
   const [articles, setArticles] = useState<ArticleCardProps[]>(initialArticles ?? []);
   const loadRef = useRef<HTMLDivElement>(null);
   const currentPage = useRef(1);
+  const hasMore = useRef(true);
 
   const fetchArticles = useCallback(async () => {
     const articles = await getArticles(currentPage.current+1);
     currentPage.current++;
     setArticles(prev=>[...prev, ...articles.data]);
+    if (articles.data.length < 12) {
+      hasMore.current = false;
+    }
   }, [currentPage]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && loadNext && hasMore.current) {
           fetchArticles();
         }
       });
@@ -39,7 +45,7 @@ export const ArticlesGrid = ({
         observer.unobserve(loadRef.current);
       }
     }
-  }, [loadRef]);
+  }, [loadRef, loadNext, hasMore]);
 
     return (
       <section>
@@ -48,7 +54,7 @@ export const ArticlesGrid = ({
           items={articles}
           config={{
             columns: [1, 2, 3],
-            gap: [24, 12, 6],
+            gap: [16, 16, 24],
             media: [640, 768, 1024],
           }}
           render={(article) => (
@@ -56,9 +62,11 @@ export const ArticlesGrid = ({
           )}
           />
           {/* Inifinite Scroll */}
-        <div ref={loadRef} className="mt-16 pt-8 border-t text-center text-muted-foreground">
-          Loading...
-        </div>
+        {loadNext && (
+            <div ref={loadRef} className="mt-16 pt-8 border-t text-center text-muted-foreground">
+            Loading...
+          </div>
+        )}
         </section>
     )
 }

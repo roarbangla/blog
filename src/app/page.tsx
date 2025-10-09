@@ -2,8 +2,10 @@ import { Header } from "@src/components/shared";
 import { ArticlesGrid } from '@src/components/shared/articles-grid';
 import { getArticles } from "@src/lib/articles";
 
-export default async function Home() {
-  const articles = await getArticles();
+export default async function Home({searchParams}: {searchParams: Promise<{search?: string}>}) {
+  const {search=""} = await searchParams;
+
+  const articles = await getArticles({ search });
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -20,7 +22,7 @@ export default async function Home() {
           </p>
         </section>
 
-        <ArticlesGrid articles={articles} />
+        <ArticlesGrid articles={articles} loadNext={search === ""} />
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t text-center text-muted-foreground">

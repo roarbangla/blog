@@ -16,14 +16,15 @@ export const Header = () => {
 
         {/* Search Bar - Desktop */}
         <div className="hidden md:flex flex-1 max-w-md mx-8">
-          <div className="relative w-full">
+          <form action="/" method="get" className="relative w-full">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
+              name="search"
               placeholder="Search..."
               className="w-full pl-10 bg-secondary/50 border-border focus-visible:ring-primary"
             />
-          </div>
+          </form>
         </div>
 
         {/* Right side actions */}
