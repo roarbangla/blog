@@ -16,3 +16,34 @@ export function jsonSerialize(data: unknown) {
     )
   );
 }
+
+export function formatDate(date: Date | null) {
+  if (!date) return "";
+
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+export function parseHtml(html: string) {
+  return decodeEntities(html);
+}
+
+export function decodeEntities(encodedString: string) {
+  var translate_re = /&(nbsp|amp|quot|lt|gt);/g;
+  var translate = {
+      "nbsp":" ",
+      "amp" : "&",
+      "quot": "\"",
+      "lt"  : "<",
+      "gt"  : ">"
+  };
+  return encodedString.replace(translate_re, function(match, entity) {
+      return translate[entity as keyof typeof translate];
+  }).replace(/&#(\d+);/gi, function(match, numStr) {
+      var num = parseInt(numStr, 10);
+      return String.fromCharCode(num);
+  });
+}
