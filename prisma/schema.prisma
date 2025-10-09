@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          BigInt    @id @default(autoincrement())
+  category_id BigInt?    @unique // Possibly external reference or legacy ID
+  name        String
+  slug        String
+  description String?
+  parent      BigInt?
+
+  // Relations
+  posts       Post[]     @relation("CategoryPosts")
+
+  @@map("categories")
+}
+
+model Post {
+  id             BigInt     @id @default(autoincrement())
+  post_id        BigInt
+  title          String
+  slug           String      @unique
+  content        String
+  excerpt        String?
+  date           DateTime?
+  author_id      BigInt?
+  category_id    BigInt?
+  featured_media Json?
+  extras         Json?
+  created_at     DateTime?   @default(now())
+  updated_at     DateTime?   @updatedAt
+
+  // Relations
+  author   User?     @relation(fields: [author_id], references: [user_id])
+  category Category? @relation("CategoryPosts", fields: [category_id], references: [category_id])
+
+  @@map("posts")
+}
+
+model User {
+  id          BigInt    @id @default(autoincrement())
+  user_id     BigInt?   @unique
+  name        String
+  username    String?
+  email       String?
+  password    String?
+  avatar      String?
+  description String?
+  url         String?
+  created_at  DateTime? @default(now())
+  updated_at  DateTime?
+
+  // Relations
+  posts Post[]
+
+  @@map("users")
+}
