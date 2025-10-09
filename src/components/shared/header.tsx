@@ -1,7 +1,7 @@
-import { Search, Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Link from "next/link";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 
 export const Header = () => {
   return (
@@ -31,11 +31,6 @@ export const Header = () => {
           {/* Search Icon - Mobile */}
           <Button variant="ghost" size="icon" className="md:hidden">
             <Search className="h-5 w-5" />
-          </Button>
-
-          {/* Language Selector */}
-          <Button variant="ghost" className="font-medium">
-            English
           </Button>
 
           {/* Menu */}

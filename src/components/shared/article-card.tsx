@@ -5,6 +5,7 @@ import { Calendar, FileText } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { formatDate, parseHtml } from "@src/lib/utils";
+import Image from "next/image";
 
 export const ArticleCard = ({
   slug,
@@ -25,7 +26,7 @@ export const ArticleCard = ({
       >
         {/* Image Container */}
         <div className="relative overflow-hidden aspect-[16/10]">
-          <img
+          <Image
             src={featured_media?.source_url}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

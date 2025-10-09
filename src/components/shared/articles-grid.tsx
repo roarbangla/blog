@@ -51,7 +51,7 @@ export const ArticlesGrid = ({
             gap: [24, 12, 6],
             media: [640, 768, 1024],
           }}
-          render={(article, idx) => (
+          render={(article) => (
             <ArticleCard key={article.id} {...article} />
           )}
           />

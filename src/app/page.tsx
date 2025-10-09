@@ -4,10 +4,6 @@ import { getArticles } from "@src/lib/articles";
 
 export default async function Home() {
   let articles = await getArticles();
-  const loadMore = async (page: number) => {
-    const articles = await getArticles({ page });
-    articles.push(...articles);
-  }
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -28,7 +24,7 @@ export default async function Home() {
 
         {/* Footer */}
         <footer className="mt-16 pt-8 border-t text-center text-muted-foreground">
-          <p>&copy; 2024 Roar Media. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Roar Bangla. All rights reserved.</p>
         </footer>
       </main>
     </div>

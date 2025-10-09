@@ -1,5 +1,5 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -32,8 +32,8 @@ export function parseHtml(html: string) {
 }
 
 export function decodeEntities(encodedString: string) {
-  var translate_re = /&(nbsp|amp|quot|lt|gt);/g;
-  var translate = {
+  const translate_re = /&(nbsp|amp|quot|lt|gt);/g;
+  const translate = {
       "nbsp":" ",
       "amp" : "&",
       "quot": "\"",
@@ -43,7 +43,7 @@ export function decodeEntities(encodedString: string) {
   return encodedString.replace(translate_re, function(match, entity) {
       return translate[entity as keyof typeof translate];
   }).replace(/&#(\d+);/gi, function(match, numStr) {
-      var num = parseInt(numStr, 10);
+      const num = parseInt(numStr, 10);
       return String.fromCharCode(num);
   });
 }

@@ -5,6 +5,7 @@ import { getArticle, getRelatedArticles } from "@src/lib/articles";
 import { formatDate, parseHtml } from "@src/lib/utils";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image';
 
 export default async function Article ({
     params,
@@ -38,7 +39,7 @@ export default async function Article ({
       <article className="animate-fade-in">
         {/* Hero Image */}
         <div className="relative w-full h-[60vh] overflow-hidden">
-          <img
+          <Image
             src={article.featured_media?.source_url}
             alt={article.title}
             className="w-full h-full object-cover"
