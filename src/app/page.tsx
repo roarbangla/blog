@@ -3,7 +3,7 @@ import { ArticlesGrid } from '@src/components/shared/articles-grid';
 import { getArticles } from "@src/lib/articles";
 
 export default async function Home() {
-  let articles = await getArticles();
+  const articles = await getArticles();
 
   return (
     <div className="min-h-screen bg-slate-50">
