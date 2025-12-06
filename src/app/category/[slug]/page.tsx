@@ -1,6 +1,10 @@
 import { Footer, Header } from "@src/components/shared";
 import { ArticlesGrid } from "@src/components/shared/articles-grid";
-import { getCategoryBySlug, getArticlesByCategory } from "@src/lib/categories";
+import {
+  getCategoryBySlug,
+  getArticlesByCategory,
+  getTotalArticlesByCategory,
+} from "@src/lib/categories";
 import { Button } from "@src/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
@@ -29,7 +33,12 @@ export default async function CategoryPage({
     );
   }
 
-  const articles = await getArticlesByCategory(category.category_id ?? undefined);
+  const articles = await getArticlesByCategory(
+    category.category_id ?? undefined
+  );
+  const totalArticles = await getTotalArticlesByCategory(
+    category.category_id ?? undefined
+  );
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -56,17 +65,20 @@ export default async function CategoryPage({
               </p>
             )}
             <div className="mt-6 text-sm text-muted-foreground">
-              {articles.length} {articles.length === 1 ? 'article' : 'articles'} in this category
+              {totalArticles} {totalArticles === 1 ? "article" : "articles"} in
+              this category
             </div>
           </div>
         </section>
 
         {/* Articles Grid */}
         {articles.length > 0 ? (
-          <ArticlesGrid articles={articles} loadNext={false} />
+          <ArticlesGrid articles={articles} loadNext={true} />
         ) : (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No articles found in this category yet.</p>
+            <p className="text-muted-foreground">
+              No articles found in this category yet.
+            </p>
           </div>
         )}
 

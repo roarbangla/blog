@@ -54,3 +54,13 @@ export async function getArticlesByCategory(
         },
     }) as ArticleCardProps[];
 }
+
+export const getTotalArticlesByCategory = async (categoryId: bigint | undefined): Promise<number> => {
+    if (!categoryId) {
+        return 0;
+    }
+
+    return await prisma.post.count({
+        where: { category_id: categoryId },
+    });
+}
