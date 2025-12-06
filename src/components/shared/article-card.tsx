@@ -38,9 +38,11 @@ export const ArticleCard = ({
           
           {/* Category Badge */}
           <div className="absolute top-4 left-4">
-            <Badge className="bg-primary/90 hover:bg-primary text-primary-foreground backdrop-blur-sm">
-              {category.name}
-            </Badge>
+            <Link href={`/category/${category.slug}`} onClick={(e) => e.stopPropagation()}>
+              <Badge className="bg-primary/90 hover:bg-primary text-primary-foreground backdrop-blur-sm">
+                {category.name}
+              </Badge>
+            </Link>
           </div>
         </div>
 
