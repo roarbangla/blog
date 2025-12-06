@@ -1,5 +1,5 @@
+import { Category } from "@src/generated/prisma/client";
 import prisma from "./database";
-import { Category } from "@src/generated/prisma";
 import { ArticleCardProps } from "@src/types/article";
 
 export async function getCategoryBySlug(slug: string): Promise<Category | null> {
