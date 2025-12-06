@@ -69,9 +69,11 @@ export default async function Article ({
               </Link>
 
               <div className="mb-4">
-                <span className="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
-                  {article.category.name}
-                </span>
+                <Link href={`/category/${article.category.slug}`}>
+                  <span className="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full hover:bg-primary/20 transition-colors cursor-pointer">
+                    {article.category.name}
+                  </span>
+                </Link>
               </div>
 
               <h1 className="font-playfair font-bold text-4xl md:text-5xl mb-6 text-foreground">
