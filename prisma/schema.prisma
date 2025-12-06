@@ -9,31 +9,29 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Category {
-  id          BigInt    @id @default(autoincrement())
-  category_id BigInt?    @unique // Possibly external reference or legacy ID
+  id          BigInt  @id @default(autoincrement())
+  category_id BigInt? @unique // Possibly external reference or legacy ID
   name        String
   slug        String
   description String?
   parent      BigInt?
 
   // Relations
-  posts       Post[]     @relation("CategoryPosts")
+  posts Post[] @relation("CategoryPosts")
 
   @@map("categories")
 }
 
 model Post {
-  id             BigInt     @id @default(autoincrement())
+  id             BigInt    @id @default(autoincrement())
   post_id        BigInt
   title          String
-  slug           String      @unique
+  slug           String    @unique
   content        String
   excerpt        String?
   date           DateTime?
@@ -41,8 +39,8 @@ model Post {
   category_id    BigInt?
   featured_media Json?
   extras         Json?
-  created_at     DateTime?   @default(now())
-  updated_at     DateTime?   @updatedAt
+  created_at     DateTime? @default(now())
+  updated_at     DateTime? @updatedAt
 
   // Relations
   author   User?     @relation(fields: [author_id], references: [user_id])
