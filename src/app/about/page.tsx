@@ -1,10 +1,13 @@
 import { Footer, Header } from "@src/components/shared";
 import Image from "next/image";
+import { Suspense } from "react";
 
 export default async function About() {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Header />
+      <Suspense>
+        <Header />
+      </Suspense>
 
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Hero Section */}
