@@ -1,7 +1,7 @@
 import { Footer, Header } from "@src/components/shared";
 import Image from "next/image";
 
-export default async function () {
+export default async function About() {
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -145,4 +145,4 @@ export default async function () {
       </main>
     </div>
   );
-};
+}
