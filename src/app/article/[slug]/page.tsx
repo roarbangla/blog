@@ -47,16 +47,18 @@ export default async function Article ({
       <Header />
       <article className="animate-fade-in">
         {/* Hero Image */}
-        <div className="relative w-full h-[60vh] overflow-hidden">
-          <Image
-            src={article.featured_media?.source_url}
-            alt={article.title}
-            width={1200}
-            height={900}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-overlay" />
-        </div>
+        {(article.featured_media?.source_url || (article.featured_media as any)?.url) && (
+          <div className="relative w-full h-[60vh] overflow-hidden">
+            <Image
+              src={article.featured_media?.source_url || (article.featured_media as any).url}
+              alt={article.title}
+              width={1200}
+              height={900}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-overlay" />
+          </div>
+        )}
 
         {/* Article Content */}
         <div className="container mx-auto px-4 -mt-32 relative z-10">
